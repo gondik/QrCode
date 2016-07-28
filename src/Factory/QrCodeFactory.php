@@ -84,6 +84,10 @@ class QrCodeFactory
             $qrCode->setLabelFontPath($options['label_font_path']);
         }
 
+        if (isset($options['label_font_color']) && !is_null($options['label_font_color'])) {
+            $qrCode->setLabelFontColor($options['label_font_color']);
+        }
+
         return $qrCode;
     }
 
@@ -105,6 +109,7 @@ class QrCodeFactory
             'label' => null,
             'label_font_size' => null,
             'label_font_path' => null,
+            'label_font_color' => null,
         );
 
         return $options;

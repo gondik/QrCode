@@ -115,6 +115,9 @@ class QrCode
     /** @var string */
     protected $label_font_path = '';
 
+    /** @var array */
+    protected $label_font_color = array('r' => 0, 'g' => 0, 'b' => 0);
+
     /** @var int */
     protected $label_halign = self::LABEL_HALIGN_CENTER;
 
@@ -604,6 +607,30 @@ class QrCode
     public function getLabelFontPath()
     {
         return $this->label_font_path;
+    }
+
+    /**
+     * Set QR Code label font color.
+     *
+     * @param array $label_font_color RGB color
+     *
+     * @return QrCode
+     */
+    public function setLabelFontColor($label_font_color)
+    {
+        $this->label_font_color = $label_font_color;
+
+        return $this;
+    }
+
+    /**
+     * Return color of the QR Code label font.
+     *
+     * @return string
+     */
+    public function getLabelFontColor()
+    {
+        return $this->label_font_color;
     }
 
     /**
@@ -1523,8 +1550,8 @@ class QrCode
             $label_bg_y1 = $font_y - $label_height;
             $label_bg_x2 = $font_x + $label_width + $module_size(2);
             $label_bg_y2 = $font_y;
-
-            $color = imagecolorallocate($output_image, 0, 0, 0);
+			
+            $color = imagecolorallocate($output_image, $this->label_font_color['r'], $this->label_font_color['g'], $this->label_font_color['b']);
             $label_bg_color = imagecolorallocate($output_image, 255, 255, 255);
 
             imagefilledrectangle($output_image, $label_bg_x1, $label_bg_y1, $label_bg_x2, $label_bg_y2, $label_bg_color);
